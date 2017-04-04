@@ -28,3 +28,10 @@ Events can grant unique loot/spells, titles, eventually modifications coming wit
 Multiplayer against other players. (Either hosted server, to avoid p2p security problems or connect to IP)
 
 Trading with other players.
+
+
+
+
+The original project was TheLostFortune, but due to inactivity by the other developers I started up my own repository.
+
+https://github.com/Cymback/TheLostFortune
