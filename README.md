@@ -19,9 +19,11 @@ Unique talent tree with high-end talents like “Can't be stunned” or “The e
 
 Click on an area to find combat or events through random exploring.
 
-The ability to find hidden areas, maybe areas that you can't easily got out of.
+The ability to find hidden areas, maybe areas that the character can't easily get out of.
 
 Events can turn out to be good or bad for the character.
+
+Events will be narrated, the character will have to make decisions and a story will fold out according to it.
 
 Events can grant unique loot/spells, titles, eventually modifications coming with the titles as “Demon Lord” makes the character a demon and gives stats, maybe spells that only the demon lord can use.
 
