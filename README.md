@@ -32,6 +32,6 @@ Trading with other players.
 
 
 
-The original project was TheLostFortune, but due to inactivity by the other developers I started up my own repository.
+The original project was TheLostFortune, but due to inactivity by the other developers I created my own repository.
 
 https://github.com/Cymback/TheLostFortune
