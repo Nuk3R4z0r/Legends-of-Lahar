@@ -1,0 +1,14 @@
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\bin\Debug\The Lost Fortune.exe.config
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The Lost Fortune.csprojResolveAssemblyReference.cache
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The_Lost_Fortune.ConfirmCharacterName.resources
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The_Lost_Fortune.MainForm.resources
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The_Lost_Fortune.Properties.Resources.resources
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The_Lost_Fortune.MapControl.resources
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The Lost Fortune.csproj.GenerateResource.Cache
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\bin\Debug\The Lost Fortune.exe
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\bin\Debug\The Lost Fortune.pdb
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The Lost Fortune.exe
+C:\Users\madsm\Documents\GitHub\TheLostFortune\The Lost Fortune\The Lost Fortune\obj\Debug\The Lost Fortune.pdb
+C:\Users\madsm\Documents\Legends of Lahar\The Lost Fortune\bin\Debug\The Lost Fortune.exe.config
+C:\Users\madsm\Documents\Legends of Lahar\The Lost Fortune\obj\Debug\The Lost Fortune.exe
+C:\Users\madsm\Documents\Legends of Lahar\The Lost Fortune\obj\Debug\The Lost Fortune.pdb
