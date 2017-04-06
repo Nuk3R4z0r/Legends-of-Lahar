@@ -15,7 +15,7 @@ namespace Legends_Of_Lahar
 
         //skal bruge et array af data for at oprette en entity, kaldet player
         //når en player bliver oprettet sendes playerens data også til entity via base()
-        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, int[] skills, int gold, int exp, string pic) 
+        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, int gold, int exp, string pic) 
             : base(name, lvl, health, mana, pdamage, mdamage, res, dodge, skills, pic)
         {
             _experiencePoints = exp;

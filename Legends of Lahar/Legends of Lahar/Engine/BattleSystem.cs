@@ -100,7 +100,8 @@ namespace Legends_Of_Lahar
                     _currentForm.SendToBox(currentEntity.GetName() + " uses " + SkillData.SkillList[_actionId[1]].Name + "!");
 
                     if(!enemyDodged)
-                    SkillData.UseSkill(_actionId[1], currentEntity, enemy);
+                        dmg = SkillData.UseSkill(_actionId[1], currentEntity, enemy);
+                        
                     break;
                 case 4:
                     //flee

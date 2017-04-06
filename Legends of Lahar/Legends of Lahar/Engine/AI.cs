@@ -11,18 +11,18 @@ namespace Legends_Of_Lahar
         public static int[] MakeChoice(Enemy ai, Player target)
         {
             Random rnd = new Random();
-            List<int> temp = ai.GetSkills();
+            List<Skill> temp = ai.GetSkills();
             int action = rnd.Next(0, 2);
 
             if (temp != null && temp.Count != 0 && action == 0)
             {
                 List<int> possibleSkills = new List<int>();
 
-                foreach(int i in temp)
+                foreach(Skill i in temp)
                 {
-                    if(SkillData.SkillList.ElementAt(i).ManaCost <= ai.GetMana())
+                    if(SkillData.SkillList.ElementAt(i.ID).ManaCost <= ai.GetMana())
                     {
-                        possibleSkills.Add(i);
+                        possibleSkills.Add(i.ID);
                     }
                 }
 

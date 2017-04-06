@@ -37,21 +37,20 @@ namespace Legends_Of_Lahar
             pBoxEnemy.Parent = pBoxEnvironment;
             lblEnvironment.Parent = pBoxEnvironment;
 
-            //Load Game Resources
+            //Load Game Resources, needs to be in order at this time
+            SkillData.GenerateSkillList();
+            EffectData.GenerateScriptList();
             ItemData.GenerateItems();
             MonsterData.GenerateMonsters();
             MapData.GenerateMaps(this);
 
-            SkillData.GenerateSkillList();
-            EffectData.GenerateScriptList();
-
             //starter manager der opdaterer UI
             GameManager gm = new GameManager(this);
 
-            //supposed to load player here         //lvl lif man mbon pbon
-            gm._currentPlayer = new Player("Test Player", 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, new int[] { } , 10, 20, "\\Custom\\Player.jpg");
+            //supposed to load player here             //lvl lif man mbon pbon
+            gm._currentPlayer = new Player("Test Player", 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, new Skill[] { SkillData.SkillList[1] } , 10, 20, "\\Custom\\Player.jpg");
 
-            
+            cBoxSkill.DisplayMember = "Name";
             
             gBoxPlayer.Text = GameManager._GM._currentPlayer.GetName();
         }
@@ -118,6 +117,13 @@ namespace Legends_Of_Lahar
                 lblPlayerMana.Text = stats[2];
                 lblPlayerPhysicalBonus.Text = stats[3];
                 lblPlayerMagicBonus.Text = stats[4];
+                var test = GameManager._GM._currentPlayer.GetSkills().Except(cBoxSkill.Items.Cast<Skill>().ToList());
+                
+                if (test.Any()) //REFACTOR ME
+                {
+                    cBoxSkill.Items.Clear();
+                    cBoxSkill.Items.AddRange(GameManager._GM._currentPlayer.GetSkills().ToArray());
+                }
             });
         }
 
@@ -191,6 +197,12 @@ namespace Legends_Of_Lahar
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             GameManager._GM.StopWatching();
+        }
+
+        private void btnUseSkill_Click(object sender, EventArgs e)
+        {
+            if (bs != null && bs.GetBattleStatus())
+                bs.SetAction(3, ((Skill)cBoxSkill.SelectedItem).ID);
         }
     }
 }

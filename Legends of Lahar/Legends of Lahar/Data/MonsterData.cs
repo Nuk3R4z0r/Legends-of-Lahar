@@ -14,7 +14,7 @@ namespace Legends_Of_Lahar
         private static List<Enemy> monsters = new List<Enemy>();
         public static void GenerateMonsters()
         {
-            monsters.Add(new Enemy("Rat", 1, 15, 100, 10, 10, new Resist(10, 0, 20, 0), 50, new int[] { 4, 5 } , new Item[] { ItemData.GetItem(0) }, 0, 0, Area.AREA_CRATER, "\\Enemies\\Rat.jpg"));
+            monsters.Add(new Enemy("Rat", 1, 15, 10, 10, 10, new Resist(10, 0, 20, 0), 50, new Skill[] { SkillData.SkillList[4], SkillData.SkillList[5] } , new Item[] { ItemData.GetItem(0) }, 0, 0, Area.AREA_CRATER, "\\Enemies\\Rat.jpg"));
         }
 
         //henter en liste af enemies bestemt efter hvilket område man er i, areaCode

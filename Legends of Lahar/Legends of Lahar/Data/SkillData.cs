@@ -27,15 +27,15 @@ namespace Legends_Of_Lahar
         public static void GenerateSkillList()
         {
             SkillList = new List<Skill>();
-            SkillList.Add(new Skill("Last Resort", TYPE_PHYSICAL, 0, WEAPON_ALL ));
-            SkillList.Add(new Skill("Heavy Strike", TYPE_PHYSICAL, 10, WEAPON_MELEE ));
-            SkillList.Add(new Skill("Firebolt", TYPE_FIRE, 5, WEAPON_STAFF ));
-            SkillList.Add(new Skill("Curse Of Freezing", TYPE_COLD, 100, WEAPON_STAFF ));
-            SkillList.Add(new Skill("Poison", TYPE_COLD, 10, WEAPON_MELEE));
-            SkillList.Add(new Skill("Bite", TYPE_PHYSICAL, 20, WEAPON_ALL));
+            SkillList.Add(new Skill(0, "Last Resort", TYPE_PHYSICAL, 0, WEAPON_ALL ));
+            SkillList.Add(new Skill(1, "Heavy Strike", TYPE_PHYSICAL, 10, WEAPON_MELEE ));
+            SkillList.Add(new Skill(2, "Firebolt", TYPE_FIRE, 5, WEAPON_STAFF ));
+            SkillList.Add(new Skill(3, "Curse Of Freezing", TYPE_COLD, 100, WEAPON_STAFF ));
+            SkillList.Add(new Skill(4, "Poison", TYPE_COLD, 10, WEAPON_MELEE));
+            SkillList.Add(new Skill(5, "Bite", TYPE_PHYSICAL, 20, WEAPON_ALL));
         }
 
-        public static void UseSkill(int skillId, Entity origin, Entity target)
+        public static int UseSkill(int skillId, Entity origin, Entity target)
         {
             int sendBack = 0;
 
@@ -64,6 +64,8 @@ namespace Legends_Of_Lahar
 
             if (sendBack != 0)
                 GameManager._GM.PushToForm(origin.GetName() + " deals " + target.DamageToHealth(new Damage(SkillList[skillId].DmgType, sendBack, 0)) + " damage!");
+
+            return sendBack;
             
         }
 
@@ -84,10 +86,10 @@ namespace Legends_Of_Lahar
         
         public static int HeavyStrike(Entity origin)
         {
-            if (CheckEquipment(WEAPON_MELEE, origin))
+            //if (CheckEquipment(WEAPON_MELEE, origin))
                 return origin.GetpBonus() + (int)(Math.Pow(0.35, ((double)origin.GetLevel()) * origin.GetpBonus()));
-            else
-                return 0;
+            //else
+            //    return 0;
         }
 
         public static int Firebolt(Entity origin)

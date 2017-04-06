@@ -12,3 +12,14 @@ C:\Users\madsm\Documents\Legends of Lahar\The Lost Fortune\obj\Debug\Legends of 
 C:\Users\madsm\Documents\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe.config
 C:\Users\madsm\Documents\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.exe
 C:\Users\madsm\Documents\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.pdb
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe.config
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.pdb
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.ConfirmCharacterName.resources
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.MainForm.resources
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.Properties.Resources.resources
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.MapControl.resources
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csproj.GenerateResource.Cache
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.exe
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.pdb

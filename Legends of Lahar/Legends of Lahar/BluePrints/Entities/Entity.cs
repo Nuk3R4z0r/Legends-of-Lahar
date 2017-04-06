@@ -24,7 +24,7 @@ namespace Legends_Of_Lahar
         private bool _isBlocking;
         private int _shield; //Health buffer givet via spells
         private List<Effect> _effects;
-        private List<int> _knownSkills;
+        private List<Skill> _knownSkills;
         private int _state; // 0 = dead, 1 = Severely hurt, 2 = Damaged, 3 - A few scratches, 4 - Untouched
         private int _turnsFrozen;
 
@@ -32,7 +32,7 @@ namespace Legends_Of_Lahar
 
         //skal bruge et array af data for at oprette en entity, kaldet data
         //0 er navn, 1 er level, 2 er health, 3 er mana, 4 er pdamage, 5 er mdamage, 6 er resist
-        public Entity(string name, int lvl, int health, int mana, int pDamage, int mDamage, Resist res, int dodge, int[] skills, string pic)
+        public Entity(string name, int lvl, int health, int mana, int pDamage, int mDamage, Resist res, int dodge, Skill[] skills, string pic)
         {
             _name = name;
             _level = lvl;
@@ -248,10 +248,10 @@ namespace Legends_Of_Lahar
 
         public void LearnSkill(int skillId)
         {
-            _knownSkills.Add(skillId);
+            _knownSkills.Add(SkillData.SkillList[skillId]);
         }
 
-        public List<int> GetSkills()
+        public List<Skill> GetSkills()
         {
             return _knownSkills;
         }

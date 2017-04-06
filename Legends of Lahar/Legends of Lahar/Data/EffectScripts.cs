@@ -31,7 +31,7 @@ namespace Legends_Of_Lahar
             _scriptList.Add(new Effect(3, "SoulThorns", TYPE_ON_RECIEVE_DMG, 0, 0, "You backfire a small amount of damage dealt to you.", ""));
             _scriptList.Add(new Effect(4, "Last Resort", TYPE_DEBUFF, 1, 0, "You feel death creeping closer by the second.", ""));
             _scriptList.Add(new Effect(5, "Poison", TYPE_DEBUFF, 10, 0, "You have been poisoned", ""));
-            _scriptList.Add(new Effect(6, "Frozen", TYPE_DEBUFF, 1, 0, "You have been frozen", ""));
+            _scriptList.Add(new Effect(6, "Frozen", TYPE_DEBUFF, 1, 0, "You are frozen", ""));
         }
 
         public static int RunScript(int scriptId, Entity origin, Entity target)

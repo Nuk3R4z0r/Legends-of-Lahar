@@ -454,6 +454,7 @@
             this.btnUseSkill.TabIndex = 4;
             this.btnUseSkill.Text = "Use skill";
             this.btnUseSkill.UseVisualStyleBackColor = true;
+            this.btnUseSkill.Click += new System.EventHandler(this.btnUseSkill_Click);
             // 
             // btnBlock
             // 
@@ -476,6 +477,7 @@
             // 
             // cBoxSkill
             // 
+            this.cBoxSkill.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cBoxSkill.FormattingEnabled = true;
             this.cBoxSkill.Location = new System.Drawing.Point(88, 35);
             this.cBoxSkill.Name = "cBoxSkill";
@@ -486,6 +488,7 @@
             // 
             this.txtBattleLog.Location = new System.Drawing.Point(204, 208);
             this.txtBattleLog.Name = "txtBattleLog";
+            this.txtBattleLog.ReadOnly = true;
             this.txtBattleLog.Size = new System.Drawing.Size(533, 204);
             this.txtBattleLog.TabIndex = 0;
             this.txtBattleLog.Text = "";
