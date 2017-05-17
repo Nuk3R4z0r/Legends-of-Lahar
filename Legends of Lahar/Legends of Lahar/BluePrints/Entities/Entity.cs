@@ -105,11 +105,11 @@ namespace Legends_Of_Lahar
         //damager mana, Eks. En spell som drainer npc/playerens mana
         public int DamageMana(int amount, string src)
         {
-            _mana = _health - amount;
-            if (_health > _maxHealth)
-                _health = _maxHealth;
-            if (_health < 0)
-                _health = 0;
+            _mana = _mana - amount;
+            if (_mana > _maxMana)
+                _mana = _maxMana;
+            if (_mana < 0)
+                _mana = 0;
             
             return _mana;
         }
@@ -258,7 +258,7 @@ namespace Legends_Of_Lahar
 
         public void AddEffect(Effect e)
         {
-            _effects.Add(e);
+            _effects.Add(new Effect(e));
         }
 
         public List<Effect> GetEffects()

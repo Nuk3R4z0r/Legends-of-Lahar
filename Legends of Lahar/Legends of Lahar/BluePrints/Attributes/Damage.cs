@@ -21,7 +21,15 @@ namespace Legends_Of_Lahar
         public Damage(int dmgType, int minDmg, int maxDmg, int critChance)
         {
             DamageType = dmgType;
+            if (minDmg < 0)
+            {
+                minDmg = 0;
+            }
             Minimum = minDmg;
+            if (minDmg < 0)
+            {
+                minDmg = 0;
+            }
             Maximum = maxDmg;
             CriticalChance = critChance;
         }
@@ -29,6 +37,10 @@ namespace Legends_Of_Lahar
         public Damage(int dmgType, int dmg, int critChance)
         {
             DamageType = dmgType;
+            if(dmg < 0)
+            {
+                dmg = 0;
+            }
             Minimum = dmg;
             Maximum = dmg;
             CriticalChance = critChance;
@@ -36,13 +48,19 @@ namespace Legends_Of_Lahar
 
         public int Random()
         {
-            Random rnd = new Random();
-           
-            int dmg = rnd.Next(Minimum, Maximum);
+            int dmg;
+            if (Minimum != Maximum)
+            {
+                Random rnd = new Random();
 
-            if (rnd.Next(0, 100) < CriticalChance)
-                dmg = (int)(dmg * 1.5);
+                dmg = rnd.Next(Minimum, Maximum);
 
+                if (rnd.Next(0, 100) < CriticalChance)
+                    dmg = (int)(dmg * 1.5);
+
+            }
+            else
+                dmg = Minimum;
 
             return dmg;
         }

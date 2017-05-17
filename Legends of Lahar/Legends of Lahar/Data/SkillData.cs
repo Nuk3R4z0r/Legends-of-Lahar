@@ -35,12 +35,11 @@ namespace Legends_Of_Lahar
             SkillList.Add(new Skill(5, "Bite", TYPE_PHYSICAL, 20, WEAPON_ALL));
         }
 
-        public static int UseSkill(int skillId, Entity origin, Entity target)
+        public static Damage UseSkill(int skillId, Entity origin, Entity target)
         {
             int sendBack = 0;
 
-            origin.DamageMana(SkillList[skillId].ManaCost, SkillList[skillId].Name); // Refactor me pls
-            switch(skillId)
+            switch(skillId) //maybe refactor with interface?
             {
                 case 0:
                     sendBack = LastResort(origin);
@@ -61,11 +60,8 @@ namespace Legends_Of_Lahar
                     sendBack = Bite(origin);
                     break;
             }
-
-            if (sendBack != 0)
-                GameManager._GM.PushToForm(origin.GetName() + " deals " + target.DamageToHealth(new Damage(SkillList[skillId].DmgType, sendBack, 0)) + " damage!");
-
-            return sendBack;
+            
+            return new Damage(SkillList[skillId].DmgType, sendBack, 0);
             
         }
 

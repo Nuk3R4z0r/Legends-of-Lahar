@@ -51,7 +51,7 @@ namespace Legends_Of_Lahar
                 {
                     if (!_effectsChecked)
                     {
-                        GameManager._GM.CheckEffects(_enemy, _player);
+                        GameManager._GM.CheckEffects(_player, _enemy);
                         _effectsChecked = true;
                     }
 
@@ -77,18 +77,23 @@ namespace Legends_Of_Lahar
             }
 
             _currentForm.ClearEnemy();
+            Thread.Sleep(10);
         }
 
         private void Fight(Entity currentEntity, Entity enemy)
         {
-            int dmg = 0;
-            bool enemyDodged = enemy.RollDodge();
+            Damage dmg = new Damage(0, 0, 0);
+            bool enemyDodged = false;
+
             switch (_actionId[0])
             {
                 case 1:
                     //Basic Attack
-                    dmg = currentEntity.GetpBonus(); // + WEAPON DAMAGE IN FUTURE // REFACTOR SÅ DAMAGE MODDED AF RESIST ER GLOBAL
                     _currentForm.SendToBox(currentEntity.GetName() + " uses basic attack!");
+                    enemyDodged = enemy.RollDodge();
+                    if(!enemyDodged)
+                    dmg = new Damage(SkillData.TYPE_PHYSICAL, currentEntity.GetpBonus(), currentEntity.GetCriticalChance()); // + WEAPON DAMAGE IN FUTURE // REFACTOR SÅ DAMAGE MODDED AF RESIST ER GLOBAL
+                    
                     break;
                 case 2:
                     //Block
@@ -98,8 +103,10 @@ namespace Legends_Of_Lahar
                 case 3:
                     //Use SKill
                     _currentForm.SendToBox(currentEntity.GetName() + " uses " + SkillData.SkillList[_actionId[1]].Name + "!");
+                    enemyDodged = enemy.RollDodge();
 
-                    if(!enemyDodged)
+                    currentEntity.DamageMana(SkillData.SkillList[_actionId[1]].ManaCost, SkillData.SkillList[_actionId[1]].Name);
+                    if (!enemyDodged)
                         dmg = SkillData.UseSkill(_actionId[1], currentEntity, enemy);
                         
                     break;
@@ -115,27 +122,21 @@ namespace Legends_Of_Lahar
 
             if (enemy.GetIsBlocking())
             {
-                if (dmg != 0 && !enemyDodged)
+                if (dmg.Maximum != 0 && !enemyDodged)
                 {
-                    int blockedDmg = (dmg / 2) + enemy.GetBlockBonus(); 
+                    int tempDmg = dmg.Random();
+                    int blockedDmg = (tempDmg / 2) + enemy.GetBlockBonus(); 
                     _currentForm.SendToBox(enemy.GetName() + " blocked " + blockedDmg + " damage!");
-                    dmg -= blockedDmg;
+                    dmg = new Damage(dmg.DamageType, tempDmg, dmg.CriticalChance);
                 }
 
                 enemy.ToggleBlocking();
             }
 
-            if (dmg != 0)
-            { 
-                if (!enemyDodged)
-                {
-                    _currentForm.SendToBox(currentEntity.GetName() + " deals " + enemy.DamageToHealth(new Damage(SkillData.TYPE_PHYSICAL, dmg, currentEntity.GetCriticalChance())) + " damage to " + enemy.GetName() + "!");
-                }
-                else
-                {
-                    _currentForm.SendToBox(enemy.GetName() + " dodges!");
-                }
-            }
+            if (enemyDodged)
+                _currentForm.SendToBox(enemy.GetName() + " dodges!");
+            else if(_actionId[0] == 1 || _actionId[0] == 3)
+                _currentForm.SendToBox(currentEntity.GetName() + " deals " + enemy.DamageToHealth(dmg) + " damage to " + enemy.GetName() + "!");
         }
 
         public bool GetBattleStatus()

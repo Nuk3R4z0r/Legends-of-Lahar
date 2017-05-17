@@ -168,6 +168,7 @@ namespace Legends_Of_Lahar
                     lblEnemyDistance.Text = "";
                     gBoxEnemy.Text = "";
                     pBoxEnemy.Image = null;
+                    GameManager._GM._currentEnemy = null;
                     ToggleButtons();
                 });
             }
@@ -184,6 +185,7 @@ namespace Legends_Of_Lahar
                     lblPlayerMana.Text = "";
                     lblPlayerPhysicalBonus.Text = "";
                     lblPlayerMagicBonus.Text = "";
+                    GameManager._GM._currentPlayer = null;
                     txtBattleLog.AppendText("Player Died."); // refactor
                 });
         }

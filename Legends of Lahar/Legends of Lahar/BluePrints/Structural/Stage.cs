@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Legends_Of_Lahar
 {
-    class Event
+    class Stage
     {
-        Stage[] stages;
+        string NarrationFile;
+        public string Text { get; }
+
+        public Stage(string text, ChoiceData.Type type)
+        {
+
+        }
     }
 }

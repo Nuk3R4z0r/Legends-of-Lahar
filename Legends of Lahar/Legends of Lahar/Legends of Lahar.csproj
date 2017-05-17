@@ -65,6 +65,7 @@
     <Compile Include="BluePrints\Effect.cs" />
     <Compile Include="BluePrints\Attributes\Resist.cs" />
     <Compile Include="BluePrints\Skill.cs" />
+    <Compile Include="BluePrints\Structural\Stage.cs" />
     <Compile Include="Data\ChoiceData.cs" />
     <Compile Include="Data\EffectScripts.cs" />
     <Compile Include="Data\EventData.cs" />

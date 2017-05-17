@@ -47,22 +47,6 @@ namespace Legends_Of_Lahar
 
             while (_isRunning && _currentPlayer.GetState() != 0)
             {
-                //For lbl names
-                stats[0] = "LVL: ";//Level // skal måske refaktors
-                stats[1] = "Health: "; //health 
-                stats[2] = "Mana: ";//mana
-                stats[3] = "Physical damage bonus: "; //physical bonus
-                stats[4] = "Magic damage bonus: ";//magic bonus
-
-                //Opdaterer labels til player
-                stats[0] += _currentPlayer.GetLevel().ToString(); //Level // skal måske refaktors
-                stats[1] += _currentPlayer.GetHealth().ToString(); //health 
-                stats[2] += _currentPlayer.GetMana().ToString();  //mana
-                stats[3] += _currentPlayer.GetpBonus().ToString(); //physical bonus
-                stats[4] += _currentPlayer.GetmBonus().ToString(); //magic bonus
-
-                _currentForm.UpdatelblPlayer(stats);
-
                 if (_currentForm.bs != null)
                 {
                     if (_currentForm.bs.GetBattleStatus())
@@ -132,6 +116,22 @@ namespace Legends_Of_Lahar
                     count++;
                 }
 
+                //For lbl names
+                stats[0] = "LVL: ";//Level // skal måske refaktors
+                stats[1] = "Health: "; //health 
+                stats[2] = "Mana: ";//mana
+                stats[3] = "Physical damage bonus: "; //physical bonus
+                stats[4] = "Magic damage bonus: ";//magic bonus
+
+                //Opdaterer labels til player
+                stats[0] += _currentPlayer.GetLevel().ToString(); //Level // skal måske refaktors
+                stats[1] += _currentPlayer.GetHealth().ToString(); //health 
+                stats[2] += _currentPlayer.GetMana().ToString();  //mana
+                stats[3] += _currentPlayer.GetpBonus().ToString(); //physical bonus
+                stats[4] += _currentPlayer.GetmBonus().ToString(); //magic bonus
+
+                _currentForm.UpdatelblPlayer(stats);
+
                 Thread.Sleep(200);
             }
 
@@ -158,6 +158,8 @@ namespace Legends_Of_Lahar
                     }
                 }
             }
+
+            origin.UpdateEffects(temp);
         }
 
         public bool CheckEntities()
@@ -166,6 +168,7 @@ namespace Legends_Of_Lahar
             {
                 _currentForm.bs.SetBattleStatus(false);
                 _currentForm.SendToBox(_currentEnemy.GetName() + " died");
+
                 return false;
             }
             else if (_currentPlayer.GetHealth() <= 0)

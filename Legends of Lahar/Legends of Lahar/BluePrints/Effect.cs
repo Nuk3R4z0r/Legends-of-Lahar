@@ -24,5 +24,15 @@ namespace Legends_Of_Lahar
             Description = desc;
             Picture = pic;
         }
+
+        public Effect(Effect e)
+        {
+            ID = e.ID;
+            Name = e.Name;
+            ProcType = e.ProcType;
+            Ticks = e.Ticks;
+            Description = e.Description;
+            Picture = e.Picture;
+        }
     }
 }
