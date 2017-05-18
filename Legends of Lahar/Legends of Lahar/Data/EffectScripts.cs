@@ -25,7 +25,7 @@ namespace Legends_Of_Lahar
         public static void GenerateScriptList()
         {
             _scriptList = new List<Effect>();                   //0 means always
-            _scriptList.Add(new Effect(0, "Samsara", TYPE_PASSIVE, 0, 0, "You feel slightly more regenerative.", "")); //square picture image
+            _scriptList.Add(new Effect(0, "Samsara", TYPE_PASSIVE, 0, 0, "You feel slightly more regenerative.", "")); //square picture image needed as last parameter
             _scriptList.Add(new Effect(1, "Skullbreaker", TYPE_ON_HIT, 0, 0, "You hit slightly harder.", ""));
             _scriptList.Add(new Effect(2, "BrambleThorns", TYPE_ON_RECIEVE_DMG, 0, 0, "Anyone with a malicious intent, will be harmed when hitting you.", ""));
             _scriptList.Add(new Effect(3, "SoulThorns", TYPE_ON_RECIEVE_DMG, 0, 0, "You backfire a small amount of damage dealt to you.", ""));

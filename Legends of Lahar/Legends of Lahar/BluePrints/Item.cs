@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Legends_Of_Lahar
 {
+    [Serializable]
     public class Item
     {
         public string Name { get; }

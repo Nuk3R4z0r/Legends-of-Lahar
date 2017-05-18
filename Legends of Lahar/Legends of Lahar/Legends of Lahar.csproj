@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,6 +85,7 @@
       <DependentUpon>ConfirmCharacterName.cs</DependentUpon>
     </Compile>
     <Compile Include="BluePrints\Structural\Event.cs" />
+    <Compile Include="Engine\EventParser.cs" />
     <Compile Include="Engine\GameManager.cs" />
     <Compile Include="BluePrints\Entities\Player.cs" />
     <Compile Include="Data\IOstreamer.cs" />

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Legends_Of_Lahar
 {
+    [Serializable]
     public class Entity
     {
         private string _name;
@@ -20,9 +22,9 @@ namespace Legends_Of_Lahar
         private int _critChance;
         private Resist _res; //0 = physical, 1 = fire, 2 = cold, 3 = void
         private int _dodge;
-        private int _blockBonus; // skal sættes igennem items
+        private int _blockBonus; //bonus given from items
         private bool _isBlocking;
-        private int _shield; //Health buffer givet via spells
+        private int _shield; //Health buffer given from spells
         private List<Effect> _effects;
         private List<Skill> _knownSkills;
         private int _state; // 0 = dead, 1 = Severely hurt, 2 = Damaged, 3 - A few scratches, 4 - Untouched
@@ -79,7 +81,7 @@ namespace Legends_Of_Lahar
             _effects = new List<Effect>();
         }
 
-        // Når der bliver dealt skade ud - både til NPC og playeren
+        //Damage dealt to entity
         public int DamageToHealth(Damage dmg)
         {
             double amount = dmg.Random();
@@ -91,7 +93,7 @@ namespace Legends_Of_Lahar
             return (int)amount;
         }
 
-        //til at heale liv
+        //Healing health to the entity
         public int HealHealth(int amount, string src)
         {
             _health = _health + amount;
@@ -102,7 +104,7 @@ namespace Legends_Of_Lahar
             return _health;
         }
 
-        //damager mana, Eks. En spell som drainer npc/playerens mana
+        //Damage mana, drain from using spells or enemy spell damaging mana
         public int DamageMana(int amount, string src)
         {
             _mana = _mana - amount;
@@ -114,7 +116,7 @@ namespace Legends_Of_Lahar
             return _mana;
         }
 
-        // En spell som giver mana til npc/playeren
+        //healing mana to the entity
         public int HealMana(int amount, string src)
         {
             _mana = _mana + amount;
@@ -152,32 +154,28 @@ namespace Legends_Of_Lahar
 
             return false;
         }
-
-        //Henter Name
+        
         public string GetName()
         {
             return _name;
         }
-
-        //Henter level
+        
         public int GetLevel()
         {
             return _level;
         }
 
-        //tilføjer level, brugt kun i Player
+        //Adding to the entity level
         public void AddLevel()
         {
             _level++;
         }
-
-        //henter health
+        
         public int GetHealth()
         {
             return _health;
         }
-
-        //henter health
+        
         public int GetMaxHealth()
         {
             return _maxHealth;
@@ -192,14 +190,12 @@ namespace Legends_Of_Lahar
         {
             return _dodge;
         }
-
-        //henter mana
+        
         public int GetMana()
         {
             return _mana;
         }
-
-        //henter mana
+        
         public int GetMaxMana()
         {
             return _maxMana;
@@ -235,7 +231,7 @@ namespace Legends_Of_Lahar
             _isBlocking = !_isBlocking;
         }
 
-        //Henter om en entity er død eller levende
+        //For getting whether the entity is alive or dead
         public int GetState()
         {
             return _state;

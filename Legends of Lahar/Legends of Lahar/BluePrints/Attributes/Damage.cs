@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Legends_Of_Lahar
 {
+    [Serializable]
     public class Damage
     {
         public const int TYPE_PHYSICAL = 0;
@@ -57,7 +58,6 @@ namespace Legends_Of_Lahar
 
                 if (rnd.Next(0, 100) < CriticalChance)
                     dmg = (int)(dmg * 1.5);
-
             }
             else
                 dmg = Minimum;

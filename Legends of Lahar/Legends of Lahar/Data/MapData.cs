@@ -11,35 +11,34 @@ namespace Legends_Of_Lahar
     class MapData
     {
         public static List<Button[]> Maps;
-
-        //Laver mapsne og assigner områder til knapperne
+        
         public static void GenerateMaps(MainForm currentForm)
         {
             Maps = new List<Button[]>();
 
-            ///////////////////////AREAS TIL DESERTS///////////////////////////
+            ///////////////////////AREAS FOR DESERTS///////////////////////////
 
-            //Crater er Area 0
+            //Crater is Area 0
             Button btnDesertsCrater = new Button(); //Ny Knap
-            btnDesertsCrater.Name = "btnArea" + Area.AREA_CRATER; //Area.AREA_CRATER betegner areaId hvilket er 0 her, knappen kommer til at hedde btnArea0
-            btnDesertsCrater.Text = "Crater"; //Text på knappen
-            btnDesertsCrater.Location = new Point(40, 20); //hvor knappen skal ligge på kortet
-            btnDesertsCrater.Click += new EventHandler(currentForm.btnArea_Click); // ER DET SAMME FOR ALLE KNAPPER
+            btnDesertsCrater.Name = "btnArea" + Area.AREA_CRATER; //Area.AREA_CRATER is areaId 0, name of the button will be btnArea0
+            btnDesertsCrater.Text = "Crater"; //Button Text
+            btnDesertsCrater.Location = new Point(40, 20); //button location
+            btnDesertsCrater.Click += new EventHandler(currentForm.btnArea_Click); //Same handler for all buttons
 
-            //Dry steppes er Area 1
+            //Dry steppes is Area 1
             Button btnDrySteppes = new Button();
             btnDrySteppes.Name = "btnArea" + Area.AREA_DRYSTEPPES;
             btnDrySteppes.Text = "Dry steppes";
             btnDrySteppes.Location = new Point(80, 65);
             btnDrySteppes.Click += new EventHandler(currentForm.btnArea_Click);
 
-            //Adder Deserts mapsne, kommer til at ligge i position 0 i Maps listen
-            Maps.Add(new Button[] { btnDesertsCrater, btnDrySteppes }); //Da det er første vi adder, ligger det i position 0 som er det samme som mapId på deserts
+            //Adding Deserts map to the list, will be position 0
+            Maps.Add(new Button[] { btnDesertsCrater, btnDrySteppes }); 
 
-            ///////////////////////AREAS TIL FOREST///////////////////////////
+            ///////////////////////AREAS FOR FOREST///////////////////////////
 
-            //Adder Forest mapsne
-            Maps.Add(new Button[] { }); //Da det er andet vi adder, ligger det i position 1 som er det samme som mapId på Forest
+            //Adder Forest maps
+            Maps.Add(new Button[] { });
         }
     }
 }

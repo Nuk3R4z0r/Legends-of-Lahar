@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Legends_Of_Lahar
 {
+    [Serializable]
     public class Skill
     {
         public int ID { get; }

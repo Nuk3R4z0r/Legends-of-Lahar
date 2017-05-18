@@ -12,7 +12,7 @@ namespace Legends_Of_Lahar
         {
             Random rnd = new Random();
             List<Skill> temp = ai.GetSkills();
-            int action = rnd.Next(0, 2);
+            int action = rnd.Next(0, 2); //currently just taking a random choice
 
             if (temp != null && temp.Count != 0 && action == 0)
             {

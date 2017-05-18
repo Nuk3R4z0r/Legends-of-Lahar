@@ -10,7 +10,7 @@ namespace Legends_Of_Lahar
     {
         public enum Type { Next, YesNo, TakeLeave, LeftRight, LeftRightForward};
 
-        public enum Trigger { Quit, Death, Next }
+        public enum Trigger { Quit, Death, Step }
 
         public static List<string[]> ChoiceList;
 

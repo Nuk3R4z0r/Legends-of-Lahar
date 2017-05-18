@@ -13,9 +13,9 @@ namespace Legends_Of_Lahar
         public const int AREA_DRYSTEPPES = 1; //Deserts area 1
 
         public string _name;
-        private int _areaId;
-        private List<Enemy> _areaEntities; //Entities i området
-        public Bitmap _areaPic; //Environment billede
+        public int _areaId { get; }
+        private List<Enemy> _areaEntities; //Entities in the area
+        public Bitmap _areaPic; //Environment picture
         
         public Area(int areaId)
         {
@@ -34,6 +34,7 @@ namespace Legends_Of_Lahar
             _areaEntities = MonsterData.GetMonsterList(_areaId);
         }
 
+        //gets first entity in the area
         public Enemy GetFirstEntity()
         {
             Enemy rEntity = _areaEntities[0];
@@ -44,11 +45,6 @@ namespace Legends_Of_Lahar
         public List<Enemy> ListEntities()
         {
             return _areaEntities;
-        }
-
-        public int GetAreaId()
-        {
-            return _areaId;
         }
     }
 }

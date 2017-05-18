@@ -10,14 +10,14 @@ namespace Legends_Of_Lahar
     {
         //   0     1      2       3        4              5            6       7        8         9       10        11
         // name, level, health, mana, physicalDamage, magicalDamage, resist, dodge, lootReward, gold, expreward, areaCode
-        // Items position i denne liste er den samme som dens Id.
+        // Items position is the same as its ID
         private static List<Enemy> monsters = new List<Enemy>();
         public static void GenerateMonsters()
         {
             monsters.Add(new Enemy("Rat", 1, 15, 10, 10, 10, new Resist(10, 0, 20, 0), 50, new Skill[] { SkillData.SkillList[4], SkillData.SkillList[5] } , new Item[] { ItemData.GetItem(0) }, 0, 0, Area.AREA_CRATER, "\\Enemies\\Rat.jpg"));
         }
 
-        //henter en liste af enemies bestemt efter hvilket område man er i, areaCode
+        //MonsterList created for an area, defined by areaCode
         public static List<Enemy> GetMonsterList(int areaCode)
         {
             List<Enemy> monsterList = new List<Enemy>();
@@ -33,7 +33,7 @@ namespace Legends_Of_Lahar
             return monsterList;
         }
 
-        //henter enkelt monster hvis man ved man skal bruge et bestemt. angivet af monsterId
+        //Gets a single monster for special purposes, defined by monsterId
         public static Enemy GetMonster(int monsterId)
         {
             return monsters[monsterId];

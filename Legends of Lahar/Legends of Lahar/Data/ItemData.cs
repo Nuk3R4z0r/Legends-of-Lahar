@@ -33,12 +33,11 @@ namespace Legends_Of_Lahar
         // Name, Type, Damage, BonusHealth, BonusMana, BonusPhysicalDamage, BonusMagicalDamage,
         //      9           10              11               12         13    14      15         16
         // BonusResist, BonusDodge, CurrentDurability, MaxDurability, Effect, Image, Lore, DropKoefficient
-        // Items position i denne liste er den samme som dens Id.                              Mangler implementation
+        // Items position is the same is its ID.                                           Needs implementation
         private static List<Item> _items = new List<Item>();
 
         public static void GenerateItems()
         {
-            //string name = Items[1][0].ToString();
             // One Hand Swords
             // Normal
             _items.Add(new Item( "Rusted Sword", "One Handed Sword", new Damage(Damage.TYPE_PHYSICAL, 2, 4, 0), 0, 0, 0, 0, new Resist(0, 0, 0, 0), 0, 10, 10, null, "", "Old Rusted and heavily worn sword." ));

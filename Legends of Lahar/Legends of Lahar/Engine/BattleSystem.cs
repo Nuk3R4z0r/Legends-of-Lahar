@@ -19,13 +19,11 @@ namespace Legends_Of_Lahar
         private MainForm _currentForm;
         private bool _effectsChecked;
 
-        // når en battle oprettes skal den bruge et område kode for at bestemme modstander, på areaCode
+        //Battle is decided by areaCode from currentArea, gets a monster from there
         public BattleSystem(Area currentArea, MainForm currentform)
         {
             _currentForm = currentform;
-            //henter en liste af monstre man kan møde i det område man er i, på areaCode
-
-            //opretter monsteret
+            
             _enemy = new Enemy(currentArea.GetFirstEntity());
             currentform.RenderEnemy(_enemy.GetPic());
 
@@ -75,7 +73,6 @@ namespace Legends_Of_Lahar
                     _playerTurn = true;
                 }
             }
-
             _currentForm.ClearEnemy();
             Thread.Sleep(10);
         }
@@ -92,13 +89,13 @@ namespace Legends_Of_Lahar
                     _currentForm.SendToBox(currentEntity.GetName() + " uses basic attack!");
                     enemyDodged = enemy.RollDodge();
                     if(!enemyDodged)
-                    dmg = new Damage(SkillData.TYPE_PHYSICAL, currentEntity.GetpBonus(), currentEntity.GetCriticalChance()); // + WEAPON DAMAGE IN FUTURE // REFACTOR SÅ DAMAGE MODDED AF RESIST ER GLOBAL
+                    dmg = new Damage(SkillData.TYPE_PHYSICAL, currentEntity.GetpBonus(), currentEntity.GetCriticalChance()); // + WEAPON DAMAGE IN FUTURE // REFACTOR SO THAT DAMAGE IS MODDED BY RESIST GLOBALLY
                     
                     break;
                 case 2:
                     //Block
                     currentEntity.ToggleBlocking();// CHANGE ME TO SHIELD BLOCKING PARAMETER
-                    _currentForm.SendToBox(currentEntity.GetName() + " gets ready to block!"); //1 er placeholder indtil items med ordentlig block er implementeret
+                    _currentForm.SendToBox(currentEntity.GetName() + " gets ready to block!"); //PLACEHOLDER, 1 until block from items is implemented
                     break;
                 case 3:
                     //Use SKill

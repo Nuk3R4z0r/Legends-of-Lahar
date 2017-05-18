@@ -8,15 +8,14 @@ using System.Drawing;
 namespace Legends_Of_Lahar
 {
     //Nedarver fra Entity
+    [Serializable]
     public class Enemy : Entity
     {
         private int _experienceReward;
         private int _goldReward;
-        private Item[] _lootReward; //STUB, til loot når man har nakket mobben
+        private Item[] _lootReward; //STUB, for loot when the player has killed the enemy
         private int _areaId;
-
-        //skal bruge et array af data for at oprette en entity, kaldet enemy
-        //8 er experience der skal gives når enemy dør, 9 er gold der skal gives når den dør
+        
         public Enemy(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, Item[] iReward, int gReward, int eReward, int areaId, string pic) 
             : base(name, lvl, health, mana, pdamage, mdamage, res, dodge, skills, pic)
         {

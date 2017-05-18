@@ -21,21 +21,11 @@ namespace Legends_Of_Lahar
 
         private void btnCreateCharacter_click(object sender, EventArgs ee)
         {
-         
             if (txtCharacterNameField.Text != "")
             {
-                
-                List<object> Character = new List<object>();
-                Character.Add(txtCharacterNameField.Text);
-                Character.Add(100); // Gold
-                Character.Add(1); // Level
-
-                Iostreamer.SaveToFile(Character);
-                MainForm game = new MainForm();
-                game.Show();
+                GameManager._GM._currentPlayer = new Player(txtCharacterNameField.Text, 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, new Skill[] { SkillData.SkillList[1] }, 10, 20, "\\Custom\\Player.jpg");
                 this.Close();
             }
-
         }
 
     }
