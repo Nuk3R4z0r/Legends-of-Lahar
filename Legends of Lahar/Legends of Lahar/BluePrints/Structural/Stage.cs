@@ -8,12 +8,21 @@ namespace Legends_Of_Lahar
 {
     class Stage
     {
-        string NarrationFile;
+        public int StageID { get; }
+        public string NarrationFile { get; }
         public string Text { get; }
+        public List<Choice> Choices { get; }
 
-        public Stage(string text, ChoiceData.Type type)
+        public Stage(int stageID, string narrationFile, string text)
         {
+            Text = text;
+            NarrationFile = narrationFile;
+            Text = text;
+        }
 
+        public void AddChoice(Choice c)
+        {
+            Choices.Add(c);
         }
     }
 }

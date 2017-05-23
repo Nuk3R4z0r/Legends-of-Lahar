@@ -20,7 +20,7 @@ namespace Legends_Of_Lahar
             using (StreamWriter sw = new StreamWriter(path + "\\Data\\Player.sav"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(sw.BaseStream, GameManager._GM._currentPlayer);
+                bf.Serialize(sw.BaseStream, GameManager._GM.CurrentPlayer);
                 sw.Flush();
             }
         }
@@ -32,12 +32,12 @@ namespace Legends_Of_Lahar
                 BinaryFormatter bf = new BinaryFormatter();
                 using (StreamReader sr = new StreamReader(path + "\\Data\\Player.sav"))
                 {
-                    GameManager._GM._currentPlayer = (Player)bf.Deserialize(sr.BaseStream);
+                    GameManager._GM.CurrentPlayer = (Player)bf.Deserialize(sr.BaseStream);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(path + "\\Data\\Player.sav" + " is corrupt!\r\nPlease delete Player.dat");
+                MessageBox.Show(path + "\\Data\\Player.sav" + " is corrupt!\r\nPlease delete it!");
             }
         }
 

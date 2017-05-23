@@ -14,9 +14,10 @@ namespace Legends_Of_Lahar
         private List<object> _actions;
         private bool _isRunning;
         private MainForm _currentForm;
-        public Player _currentPlayer;
-        public Enemy _currentEnemy;
-        public readonly string _workingDirectory;
+        public Player CurrentPlayer;
+        public Enemy CurrentEnemy;
+        public BattleSystem BS;
+        public readonly string WorkingDirectory;
         Thread t_GM;
 
         public static GameManager _GM;
@@ -26,20 +27,20 @@ namespace Legends_Of_Lahar
             _currentForm = currentForm;
             _actions = new List<object>();
             _GM = this;
-            _workingDirectory = Directory.GetCurrentDirectory();
+            WorkingDirectory = Directory.GetCurrentDirectory();
         }
 
         public void Start()
         {
-            if(File.Exists(_workingDirectory + "\\Data\\Player.sav"))
-                IOstreamer.LoadPlayer(_workingDirectory);
+            if(File.Exists(WorkingDirectory + "\\Data\\Player.sav"))
+                IOstreamer.LoadPlayer(WorkingDirectory);
             else
             {
                 ConfirmCharacterName ccn = new ConfirmCharacterName();
                 ccn.ShowDialog();
             }
 
-            if (_currentPlayer != null)
+            if (CurrentPlayer != null)
             {
                 t_GM = new Thread(StartWatching);
                 t_GM.Start();
@@ -66,25 +67,25 @@ namespace Legends_Of_Lahar
             int count = 0;
             string[] stats = new string[6];
 
-            while (_isRunning && _currentPlayer.GetState() != 0)
+            while (_isRunning && CurrentPlayer.GetState() != 0)
             {
-                IOstreamer.SavePlayer(_workingDirectory);
+                IOstreamer.SavePlayer(WorkingDirectory);
 
-                if (_currentForm.bs != null)
+                if (BS != null)
                 {
-                    if (_currentForm.bs.GetBattleStatus())
+                    if (BS.GetBattleStatus())
                     {
                         //For lbl name enemy
                         stats[0] = "Anticipated LVL: ";
                         stats[1] = "Anticipated Status: ";
                         stats[2] = "Distance: ";
-                        stats[5] = _currentForm.bs.GetEnemyName();
+                        stats[5] = BS.GetEnemyName();
 
                         //Following checks are the info on enemy labels
-                        stats[0] += _currentForm.bs.GetEnemyLVL().ToString(); //Level
+                        stats[0] += BS.GetEnemyLVL().ToString(); //Level
 
                         // 0 = dead, 1 = Severely hurt, 2 = Damaged, 3 - A few scratches, 4 - Untouched
-                        switch (_currentForm.bs.GetEnemyState())
+                        switch (BS.GetEnemyState())
                         {
                             case 0:
                                 stats[1] += "Dead";
@@ -103,7 +104,7 @@ namespace Legends_Of_Lahar
                                 break;
                         }
 
-                        switch (_currentForm.bs.GetDistance())
+                        switch (BS.GetDistance())
                         {
                             case 0:
                                 stats[2] += "Close combat";
@@ -125,15 +126,15 @@ namespace Legends_Of_Lahar
                     }
                     else
                     {
-                        _currentEnemy = null;
-                        _currentForm.bs = null;
+                        CurrentEnemy = null;
+                        BS = null;
                     }
                 }
                 else
                 { 
                     if (count == 15)
                     {
-                        CheckEffects(_currentPlayer, null);
+                        CheckEffects(CurrentPlayer, null);
 
                         count = 0;
                     }
@@ -148,18 +149,18 @@ namespace Legends_Of_Lahar
                 stats[4] = "Magic damage bonus: ";//magic bonus
 
                 //Update labels to player
-                stats[0] += _currentPlayer.GetLevel().ToString(); //Level 
-                stats[1] += _currentPlayer.GetHealth().ToString(); //health 
-                stats[2] += _currentPlayer.GetMana().ToString();  //mana
-                stats[3] += _currentPlayer.GetpBonus().ToString(); //physical bonus
-                stats[4] += _currentPlayer.GetmBonus().ToString(); //magic bonus
+                stats[0] += CurrentPlayer.GetLevel().ToString(); //Level 
+                stats[1] += CurrentPlayer.GetHealth().ToString(); //health 
+                stats[2] += CurrentPlayer.GetMana().ToString();  //mana
+                stats[3] += CurrentPlayer.GetpBonus().ToString(); //physical bonus
+                stats[4] += CurrentPlayer.GetmBonus().ToString(); //magic bonus
 
                 _currentForm.UpdatelblPlayer(stats);
 
                 Thread.Sleep(200);
             }
 
-            IOstreamer.DeletePlayer(_workingDirectory);
+            IOstreamer.DeletePlayer(WorkingDirectory);
             _currentForm.ClearPlayer();
         }
 
@@ -191,17 +192,17 @@ namespace Legends_Of_Lahar
         //checks whether dead or alive, tells mainform
         public bool CheckEntities()
         {
-            if (_currentEnemy.GetHealth() <= 0)
+            if (CurrentEnemy.GetHealth() <= 0)
             {
-                _currentForm.bs.SetBattleStatus(false);
-                _currentForm.SendToBox(_currentEnemy.GetName() + " died");
+                BS.SetBattleStatus(false);
+                _currentForm.SendToBox(CurrentEnemy.GetName() + " died");
 
                 return false;
             }
-            else if (_currentPlayer.GetHealth() <= 0)
+            else if (CurrentPlayer.GetHealth() <= 0)
             {
-                _currentForm.bs.SetBattleStatus(false);
-                _currentForm.SendToBox(_currentPlayer.GetName() + " died");
+                BS.SetBattleStatus(false);
+                _currentForm.SendToBox(CurrentPlayer.GetName() + " died");
             }
 
             return true;

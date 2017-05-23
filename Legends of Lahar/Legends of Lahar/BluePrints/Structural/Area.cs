@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Legends_Of_Lahar
 {
+    [Serializable]
     public class Area
     {
         public const int AREA_CRATER = 0; //Deserts area 0

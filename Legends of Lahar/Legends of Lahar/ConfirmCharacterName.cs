@@ -23,7 +23,7 @@ namespace Legends_Of_Lahar
         {
             if (txtCharacterNameField.Text != "")
             {
-                GameManager._GM._currentPlayer = new Player(txtCharacterNameField.Text, 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, new Skill[] { SkillData.SkillList[1] }, 10, 20, "\\Custom\\Player.jpg");
+                GameManager._GM.CurrentPlayer = new Player(txtCharacterNameField.Text, 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, new Skill[] { SkillData.SkillList[1] }, 10, 20, "\\Custom\\Player.jpg");
                 this.Close();
             }
         }

@@ -11,14 +11,38 @@ namespace Legends_Of_Lahar
     [Serializable]
     public class Player : Entity
     {
+        private PlayerAttributes Att;
         private int _gold;
         private int _experiencePoints;
-        
+        public Area CurrentArea { get; set; }
+
         public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, int gold, int exp, string pic) 
             : base(name, lvl, health, mana, pdamage, mdamage, res, dodge, skills, pic)
         {
             _experiencePoints = exp;
             _gold = gold;
+        }
+
+        public void AddGold(int amount)
+        {
+            _gold = _gold + amount;
+        }
+
+        public bool RemoveGold(int amount)  //returns if it was possible to remove gold
+        {
+            int newGold = _gold - amount;
+
+            if (newGold < 0)
+                return false;
+            else
+                _gold = _gold - amount;
+
+            return true;
+        }
+
+        public int GetGold()
+        {
+            return _gold;
         }
 
         //For leveling the player

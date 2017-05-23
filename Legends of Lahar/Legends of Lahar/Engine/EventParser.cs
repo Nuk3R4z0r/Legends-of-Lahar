@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Legends_Of_Lahar.Engine
 {
-    class EventParser
+    public class EventParser
     {
 
     }

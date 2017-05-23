@@ -15,8 +15,6 @@ namespace Legends_Of_Lahar
     public partial class MainForm : Form
     {
         private MapControl map;
-        public BattleSystem bs;
-        private Area _currentArea;
         private bool _formReady;
         private GameManager gm;
 
@@ -60,7 +58,7 @@ namespace Legends_Of_Lahar
             cBoxSkill.DisplayMember = "Name";
 
             //player name
-            gBoxPlayer.Text = GameManager._GM._currentPlayer.GetName();
+            gBoxPlayer.Text = GameManager._GM.CurrentPlayer.GetName();
 
             _formReady = true;
         }
@@ -90,9 +88,9 @@ namespace Legends_Of_Lahar
         public void btnArea_Click(object sender, EventArgs e)
         {
             int areaId = Convert.ToInt16(((Button)sender).Name.Substring(7, 1));
-            _currentArea = new Area(areaId);
-            pBoxEnvironment.Image = _currentArea._areaPic;
-            lblEnvironment.Text = _currentArea._name;
+            gm.CurrentPlayer.CurrentArea = new Area(areaId);
+            pBoxEnvironment.Image = gm.CurrentPlayer.CurrentArea._areaPic;
+            lblEnvironment.Text = gm.CurrentPlayer.CurrentArea._name;
             btnWander.Enabled = true;
             map.Visible = false;
         }
@@ -100,7 +98,7 @@ namespace Legends_Of_Lahar
         private void btnWander_Click(object sender, EventArgs e)
         {
             //Random Event or battle
-            bs = new BattleSystem(_currentArea, this);
+            gm.BS = new BattleSystem(gm.CurrentPlayer.CurrentArea, this);
             map.Visible = false;
             btnWander.Enabled = false;
             ToggleButtons();
@@ -135,12 +133,12 @@ namespace Legends_Of_Lahar
                     lblPlayerMana.Text = stats[2];
                     lblPlayerPhysicalBonus.Text = stats[3];
                     lblPlayerMagicBonus.Text = stats[4];
-                    var test = GameManager._GM._currentPlayer.GetSkills().Except(cBoxSkill.Items.Cast<Skill>().ToList());
+                    var test = GameManager._GM.CurrentPlayer.GetSkills().Except(cBoxSkill.Items.Cast<Skill>().ToList());
 
                     if (test.Any()) //REFACTOR ME
                     {
                         cBoxSkill.Items.Clear();
-                        cBoxSkill.Items.AddRange(GameManager._GM._currentPlayer.GetSkills().ToArray());
+                        cBoxSkill.Items.AddRange(GameManager._GM.CurrentPlayer.GetSkills().ToArray());
                     }
                 });
         }
@@ -150,7 +148,7 @@ namespace Legends_Of_Lahar
         {
             try
             {
-                pBoxEnemy.Image = Image.FromFile(GameManager._GM._workingDirectory + src);
+                pBoxEnemy.Image = Image.FromFile(GameManager._GM.WorkingDirectory + src);
             }
             catch { }
         }
@@ -160,7 +158,7 @@ namespace Legends_Of_Lahar
         {
             try
             {
-                pBoxPlayer.Image = Image.FromFile(GameManager._GM._workingDirectory + GameManager._GM._currentPlayer.GetPic());
+                pBoxPlayer.Image = Image.FromFile(GameManager._GM.WorkingDirectory + GameManager._GM.CurrentPlayer.GetPic());
             }
             catch { }
         }
@@ -209,7 +207,7 @@ namespace Legends_Of_Lahar
                     lblPlayerMana.Text = "";
                     lblPlayerPhysicalBonus.Text = "";
                     lblPlayerMagicBonus.Text = "";
-                    GameManager._GM._currentPlayer = null;
+                    GameManager._GM.CurrentPlayer = null;
                     txtBattleLog.AppendText("Player Died."); // refactor
                     gm.Start();
                 });
@@ -218,15 +216,15 @@ namespace Legends_Of_Lahar
         //button for basic attack
         private void btnBasicAttack_Click(object sender, EventArgs e)
         {
-            if (bs != null && bs.GetBattleStatus())
-                bs.SetAction(1, 0);
+            if (gm.BS != null && gm.BS.GetBattleStatus())
+                gm.BS.SetAction(1, 0);
         }
 
         //button for use skill
         private void btnUseSkill_Click(object sender, EventArgs e)
         {
-            if (bs != null && bs.GetBattleStatus())
-                bs.SetAction(3, ((Skill)cBoxSkill.SelectedItem).ID);
+            if (gm.BS != null && gm.BS.GetBattleStatus())
+                gm.BS.SetAction(3, ((Skill)cBoxSkill.SelectedItem).ID);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

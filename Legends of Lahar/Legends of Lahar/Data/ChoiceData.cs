@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace Legends_Of_Lahar
 {
-    class ChoiceData
+    public class ChoiceData
     {
-        public enum Type { Next, YesNo, TakeLeave, LeftRight, LeftRightForward};
+        public enum Type { Next, Yes, No, Take, Leave, Left, Right, Forward, Enter};
 
-        public enum Trigger { Quit, Death, Step }
+        public enum Trigger { Quit, Death, Step, Trial }
 
-        public static List<string[]> ChoiceList;
+        public static List<string> ChoiceList;
 
         public static void GenerateChoices()
         {
-            ChoiceList.Add(new string[] { "Next"});
-            ChoiceList.Add(new string[] { "Yes", "No" });
-            ChoiceList.Add(new string[] { "Take", "Leave" });
-            ChoiceList.Add(new string[] { "Left", "Right" });
-            ChoiceList.Add(new string[] { "Left", "Forward", "Right"  });
+            ChoiceList.Add("Next");
+            ChoiceList.Add("Yes");
+            ChoiceList.Add("No");
+            ChoiceList.Add("Take");
+            ChoiceList.Add("Leave");
+            ChoiceList.Add("Left");
+            ChoiceList.Add("Right");
+            ChoiceList.Add("Forward");
+            ChoiceList.Add("Enter");
         }
     }
 }

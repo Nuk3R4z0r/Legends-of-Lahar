@@ -27,8 +27,8 @@ namespace Legends_Of_Lahar
             _enemy = new Enemy(currentArea.GetFirstEntity());
             currentform.RenderEnemy(_enemy.GetPic());
 
-            _player = GameManager._GM._currentPlayer;
-            GameManager._GM._currentEnemy = _enemy;
+            _player = GameManager._GM.CurrentPlayer;
+            GameManager._GM.CurrentEnemy = _enemy;
 
             _actionId = new int[2];
 
