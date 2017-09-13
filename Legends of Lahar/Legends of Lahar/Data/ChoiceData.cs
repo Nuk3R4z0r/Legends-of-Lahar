@@ -8,9 +8,9 @@ namespace Legends_Of_Lahar
 {
     public class ChoiceData
     {
-        public enum Type { Next, Yes, No, Take, Leave, Left, Right, Forward, Enter};
+        public enum Type { Next, Yes, No, Take, Leave, Left, Right, Forward, Enter, Back};
 
-        public enum Trigger { Quit, Death, Step, Trial }
+        public enum Trigger { Quit, Death, Step, Trial, Back }
 
         public static List<string> ChoiceList;
 
@@ -25,6 +25,7 @@ namespace Legends_Of_Lahar
             ChoiceList.Add("Right");
             ChoiceList.Add("Forward");
             ChoiceList.Add("Enter");
+            ChoiceList.Add("Back");
         }
     }
 }

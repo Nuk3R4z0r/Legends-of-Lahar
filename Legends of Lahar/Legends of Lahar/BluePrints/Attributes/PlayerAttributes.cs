@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Legends_Of_Lahar
 {
     [Serializable]
-    class PlayerAttributes
+    public class PlayerAttributes
     {
-        public const int STRENGTH_ID = 0; //Deserts area 0
-        public const int DEXTERITY_ID = 1; //Deserts area 1
-        public const int SPEED_ID = 0; //Deserts area 0
-        public const int INTELLIGENCE_ID = 1; //Deserts area 1
+        public const int STRENGTH_ID = 0; 
+        public const int DEXTERITY_ID = 1; 
+        public const int SPEED_ID = 2; 
+        public const int INTELLIGENCE_ID = 3; 
 
         List<int> Attributes;
 
@@ -23,6 +23,16 @@ namespace Legends_Of_Lahar
             Attributes.Add(dexterity);
             Attributes.Add(speed);
             Attributes.Add(intelligence);
+        }
+
+        public int GetAttribute(int attId)
+        {
+            return Attributes[attId];
+        }
+
+        public void AddAttributePoint(int attId, int points)
+        {
+            Attributes[attId] += points;
         }
     }
 }

@@ -16,11 +16,12 @@ namespace Legends_Of_Lahar
         private int _experiencePoints;
         public Area CurrentArea { get; set; }
 
-        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, int gold, int exp, string pic) 
+        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, PlayerAttributes att, int gold, int exp, string pic) 
             : base(name, lvl, health, mana, pdamage, mdamage, res, dodge, skills, pic)
         {
             _experiencePoints = exp;
             _gold = gold;
+            Att = att;
         }
 
         public void AddGold(int amount)
@@ -59,5 +60,14 @@ namespace Legends_Of_Lahar
             return 0;
         }
         
+        public int GetAttribute(int attId)
+        {
+            return Att.GetAttribute(attId);
+        }
+
+        public void AddAttributePoint(int attId, int points)
+        {
+            Att.AddAttributePoint(attId, points);
+        }
     }
 }

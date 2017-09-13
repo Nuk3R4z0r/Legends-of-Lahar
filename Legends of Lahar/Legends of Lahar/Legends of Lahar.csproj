@@ -76,6 +76,7 @@
     <Compile Include="Data\MapData.cs" />
     <Compile Include="Data\MonsterData.cs" />
     <Compile Include="Data\SkillData.cs" />
+    <Compile Include="Data\TrialData.cs" />
     <Compile Include="Engine\AI.cs" />
     <Compile Include="BluePrints\Structural\Area.cs" />
     <Compile Include="Engine\BattleSystem.cs" />

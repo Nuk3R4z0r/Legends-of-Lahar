@@ -20,12 +20,12 @@ namespace Legends_Of_Lahar
             NextStageID = nextStageID;
         }
 
-        public Choice(ChoiceData.Type type, ChoiceData.Trigger trigger, int nextStageID, Trial trial)
+        public Choice(ChoiceData.Type type, ChoiceData.Trigger trigger, int nextStageID, int trialId)
         {
             Type = type;
             Trigger = trigger;
             NextStageID = nextStageID;
-            ChoiceTrial = trial;
+            ChoiceTrial = TrialData.trials[trialId];
         }
     }
 }
