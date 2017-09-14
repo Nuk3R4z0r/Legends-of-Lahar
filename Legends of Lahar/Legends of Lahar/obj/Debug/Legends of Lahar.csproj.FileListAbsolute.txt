@@ -23,3 +23,15 @@ C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lah
 C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csproj.GenerateResource.Cache
 C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.exe
 C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.pdb
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe.config
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.pdb
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csprojResolveAssemblyReference.cache
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.ConfirmCharacterName.resources
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.MainForm.resources
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.Properties.Resources.resources
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends_Of_Lahar.MapControl.resources
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csproj.GenerateResource.Cache
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csproj.CoreCompileInputs.cache
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.exe
+C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.pdb

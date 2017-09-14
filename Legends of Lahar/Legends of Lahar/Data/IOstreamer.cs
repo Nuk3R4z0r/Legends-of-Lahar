@@ -14,6 +14,9 @@ namespace Legends_Of_Lahar
     {
         public static void SavePlayer(string path)
         {
+            if (!Directory.Exists(path + "\\Data\\"))
+                Directory.CreateDirectory(path + "\\Data\\");
+
             if (File.Exists(path + "\\Data\\Player.dat"))
                 File.Delete(path + "\\Data\\Player.dat");
 
