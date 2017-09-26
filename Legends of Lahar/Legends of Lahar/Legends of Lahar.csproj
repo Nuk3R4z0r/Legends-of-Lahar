@@ -89,6 +89,7 @@
       <DependentUpon>ConfirmCharacterName.cs</DependentUpon>
     </Compile>
     <Compile Include="BluePrints\Structural\Event.cs" />
+    <Compile Include="Engine\CryptoRandom.cs" />
     <Compile Include="Engine\EventParser.cs" />
     <Compile Include="Engine\GameManager.cs" />
     <Compile Include="BluePrints\Entities\Player.cs" />

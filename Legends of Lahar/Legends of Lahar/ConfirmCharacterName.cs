@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 
 namespace Legends_Of_Lahar
-    
 {
     public partial class ConfirmCharacterName : Form
     {
@@ -24,7 +23,7 @@ namespace Legends_Of_Lahar
             if (txtCharacterNameField.Text != "")
             {
                 GameManager._GM.CurrentPlayer = new Player(txtCharacterNameField.Text, 1, 100, 110, 10, 5, new Resist(10, 0, 0, 0), 0, 
-                    new Skill[] { SkillData.SkillList[1] },new PlayerAttributes(10, 10, 30, 10), 10, 20, "\\Custom\\Player.jpg");
+                    new Skill[] { SkillData.SkillList[1] },new PlayerAttributes(10, 10, 30, 10), new List<int>(), new List<int>(), new List<int>(), 10, 20, "\\Custom\\Player.jpg");
 
                 this.Close();
             }

@@ -15,13 +15,20 @@ namespace Legends_Of_Lahar
         private int _gold;
         private int _experiencePoints;
         public Area CurrentArea { get; set; }
+        private List<int> CurrentQuests;
+        private List<int> CompletedQuests;
+        private List<int> EventsTouched;
 
-        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, PlayerAttributes att, int gold, int exp, string pic) 
+        public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, PlayerAttributes att,
+            List<int> currentQuests, List<int> completedQuests, List<int> eventsTouched, int gold, int exp, string pic) 
             : base(name, lvl, health, mana, pdamage, mdamage, res, dodge, skills, pic)
         {
             _experiencePoints = exp;
             _gold = gold;
             Att = att;
+            CurrentQuests = currentQuests;
+            CompletedQuests = completedQuests;
+            EventsTouched = eventsTouched;
         }
 
         public void AddGold(int amount)

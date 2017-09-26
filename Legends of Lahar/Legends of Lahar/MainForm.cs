@@ -17,6 +17,7 @@ namespace Legends_Of_Lahar
         private MapControl map;
         private bool _formReady;
         private GameManager gm;
+        private CryptoRandom rnd;
 
         public MainForm()
         {
@@ -43,6 +44,8 @@ namespace Legends_Of_Lahar
             //starting gamemanager der updates entities and UI
             gm = new GameManager(this);
             gm.Start();
+
+            rnd = new CryptoRandom();
         }
 
         private void MainForm_HandleCreated(object sender, EventArgs e)
@@ -98,6 +101,7 @@ namespace Legends_Of_Lahar
         private void btnWander_Click(object sender, EventArgs e)
         {
             //Random Event or battle
+            
             gm.BS = new BattleSystem(gm.CurrentPlayer.CurrentArea, this);
             map.Visible = false;
             btnWander.Enabled = false;
@@ -231,6 +235,6 @@ namespace Legends_Of_Lahar
         {
             GameManager._GM.StopWatching();
         }
-
+        
     }
 }

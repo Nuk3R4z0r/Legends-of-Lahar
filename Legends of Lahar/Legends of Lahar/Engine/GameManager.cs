@@ -18,6 +18,7 @@ namespace Legends_Of_Lahar
         public Enemy CurrentEnemy;
         public BattleSystem BS;
         public readonly string WorkingDirectory;
+        public Event CurrentEvent;
         Thread t_GM;
 
         public static GameManager _GM;
@@ -130,6 +131,8 @@ namespace Legends_Of_Lahar
                         BS = null;
                     }
                 }
+                else if(CurrentEvent != null)
+                { }
                 else
                 { 
                     if (count == 15)
