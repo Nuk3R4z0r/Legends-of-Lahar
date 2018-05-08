@@ -18,6 +18,7 @@ namespace Legends_Of_Lahar
         private bool _formReady;
         private GameManager gm;
         private CryptoRandom rnd;
+        public static MainForm CurrentMainForm;
 
         public MainForm()
         {
@@ -42,7 +43,7 @@ namespace Legends_Of_Lahar
             MapData.GenerateMaps(this);
 
             //starting gamemanager der updates entities and UI
-            gm = new GameManager(this);
+            gm = new GameManager();
             gm.Start();
 
             rnd = new CryptoRandom();
@@ -59,10 +60,9 @@ namespace Legends_Of_Lahar
 
             //To make the skills show up with their given name
             cBoxSkill.DisplayMember = "Name";
+            
 
-            //player name
-            gBoxPlayer.Text = GameManager._GM.CurrentPlayer.GetName();
-
+            CurrentMainForm = this;
             _formReady = true;
         }
 
@@ -102,7 +102,7 @@ namespace Legends_Of_Lahar
         {
             //Random Event or battle
             
-            gm.BS = new BattleSystem(gm.CurrentPlayer.CurrentArea, this);
+            gm.CurrentBattleSystem = new BattleSystem(gm.CurrentPlayer.CurrentArea);
             map.Visible = false;
             btnWander.Enabled = false;
             ToggleButtons();
@@ -137,12 +137,16 @@ namespace Legends_Of_Lahar
                     lblPlayerMana.Text = stats[2];
                     lblPlayerPhysicalBonus.Text = stats[3];
                     lblPlayerMagicBonus.Text = stats[4];
-                    var test = GameManager._GM.CurrentPlayer.GetSkills().Except(cBoxSkill.Items.Cast<Skill>().ToList());
+                    
+                    //player name
+                    gBoxPlayer.Text = GameManager.CurrentGameManager.CurrentPlayer.GetName();
+
+                    var test = GameManager.CurrentGameManager.CurrentPlayer.GetSkills().Except(cBoxSkill.Items.Cast<Skill>().ToList());
 
                     if (test.Any()) //REFACTOR ME
                     {
                         cBoxSkill.Items.Clear();
-                        cBoxSkill.Items.AddRange(GameManager._GM.CurrentPlayer.GetSkills().ToArray());
+                        cBoxSkill.Items.AddRange(GameManager.CurrentGameManager.CurrentPlayer.GetSkills().ToArray());
                     }
                 });
         }
@@ -152,7 +156,7 @@ namespace Legends_Of_Lahar
         {
             try
             {
-                pBoxEnemy.Image = Image.FromFile(GameManager._GM.WorkingDirectory + src);
+                pBoxEnemy.Image = Image.FromFile(GameManager.CurrentGameManager.WorkingDirectory + src);
             }
             catch { }
         }
@@ -162,7 +166,7 @@ namespace Legends_Of_Lahar
         {
             try
             {
-                pBoxPlayer.Image = Image.FromFile(GameManager._GM.WorkingDirectory + GameManager._GM.CurrentPlayer.GetPic());
+                pBoxPlayer.Image = Image.FromFile(GameManager.CurrentGameManager.WorkingDirectory + GameManager.CurrentGameManager.CurrentPlayer.GetPic());
             }
             catch { }
         }
@@ -211,8 +215,8 @@ namespace Legends_Of_Lahar
                     lblPlayerMana.Text = "";
                     lblPlayerPhysicalBonus.Text = "";
                     lblPlayerMagicBonus.Text = "";
-                    GameManager._GM.CurrentPlayer = null;
-                    txtBattleLog.AppendText("Player Died."); // refactor
+                    GameManager.CurrentGameManager.CurrentPlayer = null;
+                    SendToBox("Player Died."); // refactor
                     gm.Start();
                 });
         }
@@ -220,21 +224,27 @@ namespace Legends_Of_Lahar
         //button for basic attack
         private void btnBasicAttack_Click(object sender, EventArgs e)
         {
-            if (gm.BS != null && gm.BS.GetBattleStatus())
-                gm.BS.SetAction(1, 0);
+            if (gm.CurrentBattleSystem != null && gm.CurrentBattleSystem.GetBattleStatus())
+                gm.CurrentBattleSystem.SetAction(1, 0);
         }
 
         //button for use skill
         private void btnUseSkill_Click(object sender, EventArgs e)
         {
-            if (gm.BS != null && gm.BS.GetBattleStatus())
-                gm.BS.SetAction(3, ((Skill)cBoxSkill.SelectedItem).ID);
+            if (gm.CurrentBattleSystem != null && gm.CurrentBattleSystem.GetBattleStatus())
+                gm.CurrentBattleSystem.SetAction(3, ((Skill)cBoxSkill.SelectedItem).ID);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GameManager._GM.StopWatching();
+            GameManager.CurrentGameManager.StopWatching();
         }
-        
+
+        //Button for blocking
+        private void btnBlock_Click(object sender, EventArgs e)
+        {
+            if (gm.CurrentBattleSystem != null && gm.CurrentBattleSystem.GetBattleStatus())
+                gm.CurrentBattleSystem.SetAction(2, 0);
+        }
     }
 }

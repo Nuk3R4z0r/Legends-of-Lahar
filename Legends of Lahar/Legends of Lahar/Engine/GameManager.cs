@@ -13,21 +13,19 @@ namespace Legends_Of_Lahar
     {
         private List<object> _actions;
         private bool _isRunning;
-        private MainForm _currentForm;
         public Player CurrentPlayer;
         public Enemy CurrentEnemy;
-        public BattleSystem BS;
+        public BattleSystem CurrentBattleSystem;
         public readonly string WorkingDirectory;
         public Event CurrentEvent;
         Thread t_GM;
 
-        public static GameManager _GM;
+        public static GameManager CurrentGameManager;
 
-        public GameManager(MainForm currentForm)
+        public GameManager()
         {
-            _currentForm = currentForm;
             _actions = new List<object>();
-            _GM = this;
+            CurrentGameManager = this;
             WorkingDirectory = Directory.GetCurrentDirectory();
         }
 
@@ -51,16 +49,7 @@ namespace Legends_Of_Lahar
                 Environment.Exit(0);
             }
         }
-
-        public void PushToForm(string s)
-        {
-            _currentForm.SendToBox(s);
-        }
-
-        public void AddEffect(Effect e, Entity target)
-        {
-            target.AddEffect(e);
-        }
+        
 
         private void StartWatching()
         {
@@ -72,21 +61,21 @@ namespace Legends_Of_Lahar
             {
                 IOstreamer.SavePlayer(WorkingDirectory);
 
-                if (BS != null)
+                if (CurrentBattleSystem != null)
                 {
-                    if (BS.GetBattleStatus())
+                    if (CurrentBattleSystem.GetBattleStatus())
                     {
                         //For lbl name enemy
                         stats[0] = "Anticipated LVL: ";
                         stats[1] = "Anticipated Status: ";
                         stats[2] = "Distance: ";
-                        stats[5] = BS.GetEnemyName();
+                        stats[5] = CurrentBattleSystem.GetEnemyName();
 
                         //Following checks are the info on enemy labels
-                        stats[0] += BS.GetEnemyLVL().ToString(); //Level
+                        stats[0] += CurrentBattleSystem.GetEnemyLVL().ToString(); //Level
 
                         // 0 = dead, 1 = Severely hurt, 2 = Damaged, 3 - A few scratches, 4 - Untouched
-                        switch (BS.GetEnemyState())
+                        switch (CurrentBattleSystem.GetEnemyState())
                         {
                             case 0:
                                 stats[1] += "Dead";
@@ -105,7 +94,7 @@ namespace Legends_Of_Lahar
                                 break;
                         }
 
-                        switch (BS.GetDistance())
+                        switch (CurrentBattleSystem.GetDistance())
                         {
                             case 0:
                                 stats[2] += "Close combat";
@@ -121,14 +110,14 @@ namespace Legends_Of_Lahar
 
                         if(CheckEntities())
                         {
-                            _currentForm.UpdatelblEnemy(stats);
+                            MainForm.CurrentMainForm.UpdatelblEnemy(stats);
                         }
 
                     }
                     else
                     {
                         CurrentEnemy = null;
-                        BS = null;
+                        CurrentBattleSystem = null;
                     }
                 }
                 else if(CurrentEvent != null)
@@ -158,13 +147,16 @@ namespace Legends_Of_Lahar
                 stats[3] += CurrentPlayer.GetpBonus().ToString(); //physical bonus
                 stats[4] += CurrentPlayer.GetmBonus().ToString(); //magic bonus
 
-                _currentForm.UpdatelblPlayer(stats);
+                MainForm.CurrentMainForm.UpdatelblPlayer(stats);
 
                 Thread.Sleep(200);
             }
-
+            if(CurrentBattleSystem != null)
+            {
+                CurrentBattleSystem.SetBattleStatus(false);
+            }
             IOstreamer.DeletePlayer(WorkingDirectory);
-            _currentForm.ClearPlayer();
+            MainForm.CurrentMainForm.ClearPlayer();
         }
 
         //runs the scripts on an entity
@@ -177,15 +169,19 @@ namespace Legends_Of_Lahar
                 for (int i = 0; i < temp.Count; i++)
                 {
                     Effect e = temp.ElementAt(i);
-                    EffectData.RunScript(e.ID, origin, target);
+                    
                     if (e.Ticks > 0)
                     {
                         e.Ticks += -1;
+                        EffectData.RunScript(e.ID, e.Ticks, origin, target);
                         if (e.Ticks == 0)
                         {
                             temp.Remove(e);
+                            MainForm.CurrentMainForm.SendToBox(e.Name + " fades from " + origin.GetName());
                         }
                     }
+                    else
+                        EffectData.RunScript(e.ID, e.Ticks, origin, target);
                 }
             }
 
@@ -197,15 +193,15 @@ namespace Legends_Of_Lahar
         {
             if (CurrentEnemy.GetHealth() <= 0)
             {
-                BS.SetBattleStatus(false);
-                _currentForm.SendToBox(CurrentEnemy.GetName() + " died");
+                CurrentBattleSystem.SetBattleStatus(false);
+                MainForm.CurrentMainForm.SendToBox(CurrentEnemy.GetName() + " died");
 
                 return false;
             }
             else if (CurrentPlayer.GetHealth() <= 0)
             {
-                BS.SetBattleStatus(false);
-                _currentForm.SendToBox(CurrentPlayer.GetName() + " died");
+                CurrentBattleSystem.SetBattleStatus(false);
+                MainForm.CurrentMainForm.SendToBox(CurrentPlayer.GetName() + " died");
             }
 
             return true;

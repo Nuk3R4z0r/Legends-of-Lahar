@@ -16,19 +16,16 @@ namespace Legends_Of_Lahar
         private bool _playerTurn;
         private int[] _actionId;
         private bool _battleRunning;
-        private MainForm _currentForm;
         private bool _effectsChecked;
 
         //Battle is decided by areaCode from currentArea, gets a monster from there
-        public BattleSystem(Area currentArea, MainForm currentform)
+        public BattleSystem(Area currentArea)
         {
-            _currentForm = currentform;
-            
             _enemy = new Enemy(currentArea.GetFirstEntity());
-            currentform.RenderEnemy(_enemy.GetPic());
+            MainForm.CurrentMainForm.RenderEnemy(_enemy.GetPic());
 
-            _player = GameManager._GM.CurrentPlayer;
-            GameManager._GM.CurrentEnemy = _enemy;
+            _player = GameManager.CurrentGameManager.CurrentPlayer;
+            GameManager.CurrentGameManager.CurrentEnemy = _enemy;
 
             _actionId = new int[2];
 
@@ -40,7 +37,7 @@ namespace Legends_Of_Lahar
         {
             _battleRunning = true;
             _playerTurn = true;
-            _currentForm.SendToBox("You got attacked by " + _enemy.GetName());
+            MainForm.CurrentMainForm.SendToBox("You got attacked by " + _enemy.GetName());
 
             while (_battleRunning)
             {
@@ -49,7 +46,7 @@ namespace Legends_Of_Lahar
                 {
                     if (!_effectsChecked)
                     {
-                        GameManager._GM.CheckEffects(_player, _enemy);
+                        GameManager.CurrentGameManager.CheckEffects(_player, _enemy);
                         _effectsChecked = true;
                     }
 
@@ -65,7 +62,7 @@ namespace Legends_Of_Lahar
                 }
                 else
                 {
-                    GameManager._GM.CheckEffects(_enemy, _player);
+                    GameManager.CurrentGameManager.CheckEffects(_enemy, _player);
                     _actionId = AI.MakeChoice(_enemy, _player);
                     Fight(_enemy, _player);
 
@@ -73,67 +70,42 @@ namespace Legends_Of_Lahar
                     _playerTurn = true;
                 }
             }
-            _currentForm.ClearEnemy();
+            MainForm.CurrentMainForm.ClearEnemy();
             Thread.Sleep(10);
         }
 
         private void Fight(Entity currentEntity, Entity enemy)
         {
-            Damage dmg = new Damage(0, 0, 0);
-            bool enemyDodged = false;
-
             switch (_actionId[0])
             {
                 case 1:
                     //Basic Attack
-                    _currentForm.SendToBox(currentEntity.GetName() + " uses basic attack!");
-                    enemyDodged = enemy.RollDodge();
-                    if(!enemyDodged)
-                    dmg = new Damage(SkillData.TYPE_PHYSICAL, currentEntity.GetpBonus(), currentEntity.GetCriticalChance()); // + WEAPON DAMAGE IN FUTURE // REFACTOR SO THAT DAMAGE IS MODDED BY RESIST GLOBALLY
-                    
+                    MainForm.CurrentMainForm.SendToBox(currentEntity.GetName() + " uses basic attack!");
+                    // + WEAPON DAMAGE IN FUTURE // REFACTOR SO THAT DAMAGE IS MODDED BY RESIST GLOBALLY
+                    enemy.DamageToHealth(new Damage(SkillData.TYPE_PHYSICAL, currentEntity.GetpBonus(), currentEntity.GetCriticalChance()), currentEntity.GetName(),
+                        false, false, false, false);
                     break;
                 case 2:
                     //Block
                     currentEntity.ToggleBlocking();// CHANGE ME TO SHIELD BLOCKING PARAMETER
-                    _currentForm.SendToBox(currentEntity.GetName() + " gets ready to block!"); //PLACEHOLDER, 1 until block from items is implemented
+                    MainForm.CurrentMainForm.SendToBox(currentEntity.GetName() + " gets ready to block!"); //PLACEHOLDER, 1 until block from items is implemented
                     break;
                 case 3:
                     //Use SKill
-                    _currentForm.SendToBox(currentEntity.GetName() + " uses " + SkillData.SkillList[_actionId[1]].Name + "!");
-                    enemyDodged = enemy.RollDodge();
-
+                    MainForm.CurrentMainForm.SendToBox(currentEntity.GetName() + " uses " + SkillData.SkillList[_actionId[1]].Name + "!");
                     currentEntity.DamageMana(SkillData.SkillList[_actionId[1]].ManaCost, SkillData.SkillList[_actionId[1]].Name);
-                    if (!enemyDodged)
-                        dmg = SkillData.UseSkill(_actionId[1], currentEntity, enemy);
-                        
+
+                    SkillData.UseSkill(_actionId[1], currentEntity, enemy);
                     break;
                 case 4:
                     //flee
                     if (_distance >= 1)
                     {
-                        _currentForm.SendToBox(currentEntity.GetName() + " flees from the battle!");
+                        MainForm.CurrentMainForm.SendToBox(currentEntity.GetName() + " flees from the battle!");
                         _battleRunning = false;
                     }
                     break;
             }
-
-            if (enemy.GetIsBlocking())
-            {
-                if (dmg.Maximum != 0 && !enemyDodged)
-                {
-                    int tempDmg = dmg.Random();
-                    int blockedDmg = (tempDmg / 2) + enemy.GetBlockBonus(); 
-                    _currentForm.SendToBox(enemy.GetName() + " blocked " + blockedDmg + " damage!");
-                    dmg = new Damage(dmg.DamageType, tempDmg, dmg.CriticalChance);
-                }
-
-                enemy.ToggleBlocking();
-            }
-
-            if (enemyDodged)
-                _currentForm.SendToBox(enemy.GetName() + " dodges!");
-            else if(_actionId[0] == 1 || _actionId[0] == 3)
-                _currentForm.SendToBox(currentEntity.GetName() + " deals " + enemy.DamageToHealth(dmg) + " damage to " + enemy.GetName() + "!");
         }
 
         public bool GetBattleStatus()

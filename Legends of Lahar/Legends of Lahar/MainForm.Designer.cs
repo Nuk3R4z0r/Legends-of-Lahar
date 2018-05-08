@@ -111,6 +111,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gBoxEnemy.SuspendLayout();
@@ -464,6 +466,7 @@
             this.btnBlock.TabIndex = 3;
             this.btnBlock.Text = "Block";
             this.btnBlock.UseVisualStyleBackColor = true;
+            this.btnBlock.Click += new System.EventHandler(this.btnBlock_Click);
             // 
             // btnBasicAttack
             // 
@@ -940,11 +943,13 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.checkBox5);
+            this.groupBox7.Controls.Add(this.checkBox4);
             this.groupBox7.Controls.Add(this.checkBox3);
             this.groupBox7.Controls.Add(this.checkBox2);
             this.groupBox7.Location = new System.Drawing.Point(216, 4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(200, 100);
+            this.groupBox7.Size = new System.Drawing.Size(200, 147);
             this.groupBox7.TabIndex = 1;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Sound";
@@ -988,6 +993,26 @@
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Minimize when closed";
             this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(7, 68);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(103, 17);
+            this.checkBox4.TabIndex = 2;
+            this.checkBox4.Text = "Enable narration";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(7, 92);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(89, 17);
+            this.checkBox5.TabIndex = 3;
+            this.checkBox5.Text = "Enable music";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1123,5 +1148,7 @@
         private System.Windows.Forms.Label lblEnvironment;
         private System.Windows.Forms.Button btnWander;
         private System.Windows.Forms.Label lblEnemyDistance;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

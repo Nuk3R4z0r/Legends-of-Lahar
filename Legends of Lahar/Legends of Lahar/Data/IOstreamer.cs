@@ -23,7 +23,7 @@ namespace Legends_Of_Lahar
             using (StreamWriter sw = new StreamWriter(path + "\\Data\\Player.sav"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(sw.BaseStream, GameManager._GM.CurrentPlayer);
+                bf.Serialize(sw.BaseStream, GameManager.CurrentGameManager.CurrentPlayer);
                 sw.Flush();
             }
         }
@@ -35,7 +35,7 @@ namespace Legends_Of_Lahar
                 BinaryFormatter bf = new BinaryFormatter();
                 using (StreamReader sr = new StreamReader(path + "\\Data\\Player.sav"))
                 {
-                    GameManager._GM.CurrentPlayer = (Player)bf.Deserialize(sr.BaseStream);
+                    GameManager.CurrentGameManager.CurrentPlayer = (Player)bf.Deserialize(sr.BaseStream);
                 }
             }
             catch (Exception e)

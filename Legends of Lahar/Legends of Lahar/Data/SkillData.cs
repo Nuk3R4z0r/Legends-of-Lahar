@@ -62,7 +62,6 @@ namespace Legends_Of_Lahar
             }
             
             return new Damage(SkillList[skillId].DmgType, sendBack, 0);
-            
         }
 
         public static bool CheckEquipment(int type, Entity origin)
@@ -72,11 +71,9 @@ namespace Legends_Of_Lahar
 
         public static int LastResort(Entity origin)
         {
-            //Get mana to heal health like now or mana = maxhealth for fun?
-            origin.DamageMana(origin.GetMana(), SkillList[0].ToString());
-            origin.HealHealth(origin.GetMaxHealth(), SkillList[0].ToString());
-
-            //kill next turn if mana = maxhealth for balance
+            origin.HealMana(origin.GetMaxMana(), SkillList[0].Name);
+            origin.HealHealth(origin.GetMaxHealth(), SkillList[0].Name);
+            origin.AddEffect(EffectData.ScriptList[EffectData.SCRIPT_LAST_RESORT]);
             return 0;
         }
         
@@ -100,7 +97,7 @@ namespace Legends_Of_Lahar
         {
             if (CheckEquipment(WEAPON_MELEE, origin))
             {
-                target.AddEffect(EffectData._scriptList.ElementAt(EffectData.SCRIPT_POISON));
+                target.AddEffect(EffectData.ScriptList.ElementAt(EffectData.SCRIPT_POISON));
                 return (30 * (int)(Math.Pow(0.35, ((double)origin.GetLevel())))) + origin.GetmBonus();
             }
             else
@@ -109,7 +106,7 @@ namespace Legends_Of_Lahar
 
         public static int Poison(Entity origin, Entity target)
         {
-            target.AddEffect(EffectData._scriptList.ElementAt(EffectData.SCRIPT_POISON));
+            target.AddEffect(EffectData.ScriptList.ElementAt(EffectData.SCRIPT_POISON));
             return 2 * (origin.GetpBonus() / 2);
         }
 

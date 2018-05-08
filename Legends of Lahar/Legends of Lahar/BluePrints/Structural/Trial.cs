@@ -8,6 +8,8 @@ namespace Legends_Of_Lahar
 {
     public class Trial
     {
+        public enum Check { MoreThan, LessThan, HasSpell, HasQuest, HasQuestCompleted }
+
         public int TrialID { get; }
         public int RequirementID { get; }
         public int Requirement { get; }
@@ -18,9 +20,9 @@ namespace Legends_Of_Lahar
 
         public ChoiceData.Trigger SuccessTrigger { get; }
         public ChoiceData.Trigger FailTrigger { get; }
-        public TrialData.Check RequirementCheck { get; }
+        public Check RequirementCheck { get; }
 
-        public Trial(int trialID, string trialMSG, ChoiceData.Trigger success, string successMSG, ChoiceData.Trigger fail, string failMSG, int requirementID, TrialData.Check requirementCheck, int requirement)
+        public Trial(int trialID, string trialMSG, ChoiceData.Trigger success, string successMSG, ChoiceData.Trigger fail, string failMSG, int requirementID, Check requirementCheck, int requirement)
         {
             TrialID = trialID;
             TrialMSG = trialMSG;
@@ -37,27 +39,27 @@ namespace Legends_Of_Lahar
         {
             bool pass = false;
 
-            if(RequirementCheck == TrialData.Check.HasQuest)
+            if(RequirementCheck == Check.HasQuest)
             {
                 //stub for when quests are implemented
             }
-            else if(RequirementCheck == TrialData.Check.HasQuestCompleted)
+            else if(RequirementCheck == Check.HasQuestCompleted)
             {
                 //stub for when quests are implemented
             }
-            else if(RequirementCheck == TrialData.Check.HasSpell)
+            else if(RequirementCheck == Check.HasSpell)
             {
-                if (GameManager._GM.CurrentPlayer.GetSkills().Contains(SkillData.SkillList[RequirementID]))
+                if (GameManager.CurrentGameManager.CurrentPlayer.GetSkills().Contains(SkillData.SkillList[RequirementID]))
                     pass = true;
             }
-            else if(RequirementCheck == TrialData.Check.LessThan)
+            else if(RequirementCheck == Check.LessThan)
             {
-                if (GameManager._GM.CurrentPlayer.GetAttribute(PlayerAttributes.SPEED_ID) <= Requirement)
+                if (GameManager.CurrentGameManager.CurrentPlayer.GetAttribute(PlayerAttributes.SPEED_ID) <= Requirement)
                     pass = true;
             }
             else //MoreThan
             {
-                if (GameManager._GM.CurrentPlayer.GetAttribute(PlayerAttributes.SPEED_ID) >= Requirement)
+                if (GameManager.CurrentGameManager.CurrentPlayer.GetAttribute(PlayerAttributes.SPEED_ID) >= Requirement)
                     pass = true;
             }
 

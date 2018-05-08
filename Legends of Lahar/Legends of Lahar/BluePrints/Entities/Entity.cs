@@ -76,44 +76,85 @@ namespace Legends_Of_Lahar
             _isBlocking = false;
             _knownSkills = blueprint._knownSkills;
             _pic = blueprint.GetPic();
-            _state = 4;
+            _state = 4; //Alive
 
             _effects = new List<Effect>();
         }
 
         //Damage dealt to entity
-        public int DamageToHealth(Damage dmg)
+        public void DamageToHealth(Damage dmg, string originName, bool ignoreShield, bool ignoreBlock, bool ignoreDodge, bool ignoreResistances)
         {
-            double amount = dmg.Random();
-            amount = amount - (((Math.Pow(_res.GetResistance(dmg.DamageType), 0.05) * amount) - amount) / 3 ); 
-            _health = _health - (int)amount;
+            if (ignoreDodge || !RollDodge())
+            {
+                double amount = dmg.Random();
 
-            SetState();
+                if (!ignoreBlock && _isBlocking)
+                    amount = CalculateBlocking(amount);
 
-            return (int)amount;
+                if (!ignoreShield && _shield > 0)
+                    amount = CalculateShielding(amount);
+
+                if (!ignoreResistances)
+                    amount = amount - (((Math.Pow(_res.GetResistance(dmg.DamageType), 0.05) * amount) - amount) / 3);
+
+                if (amount > 0)
+                {
+                    amount = Math.Ceiling(amount);
+                    MainForm.CurrentMainForm.SendToBox(_name + " lost " + amount + " health from " + originName);
+                    _health = _health - (int)amount;
+                }
+
+                SetState();
+            }
+            else
+            {
+                MainForm.CurrentMainForm.SendToBox(_name + " dodged!");
+            }
+        }
+
+        private double CalculateBlocking(double amount)
+        {
+            int blockedDmg = _blockBonus;
+                    MainForm.CurrentMainForm.SendToBox(_name + " blocked " + blockedDmg + " damage!");
+                ToggleBlocking();
+
+            return amount - blockedDmg;
+        }
+
+        private double CalculateShielding(double amount)
+        {
+            int tempShield = _shield;
+            MainForm.CurrentMainForm.SendToBox(_name + "'s magic shell took " + (amount - tempShield) + " damage!");
+
+                _shield -= (int)amount;
+
+                if (_shield < 0)
+                    _shield = 0;
+
+                return amount - tempShield;
         }
 
         //Healing health to the entity
-        public int HealHealth(int amount, string src)
+        public void HealHealth(int amount, string src)
         {
             _health = _health + amount;
             if (_health > _maxHealth)
                 _health = _maxHealth;
 
+            MainForm.CurrentMainForm.SendToBox(_name + " gained " + amount + " health from " + src);
             SetState();
-            return _health;
         }
 
         //Damage mana, drain from using spells or enemy spell damaging mana
-        public int DamageMana(int amount, string src)
+        public void DamageMana(int amount, string src)
         {
             _mana = _mana - amount;
             if (_mana > _maxMana)
                 _mana = _maxMana;
             if (_mana < 0)
                 _mana = 0;
-            
-            return _mana;
+
+            MainForm.CurrentMainForm.SendToBox(_name + " lost " + amount + " mana from " + src);
         }
 
         //healing mana to the entity
@@ -124,7 +165,8 @@ namespace Legends_Of_Lahar
                 _mana = _maxMana;
             if (_mana < 0)
                 _mana = 0;
-            
+
+            MainForm.CurrentMainForm.SendToBox(_name + " gained " + amount + " mana from " + src);
             return _mana;
         }
 

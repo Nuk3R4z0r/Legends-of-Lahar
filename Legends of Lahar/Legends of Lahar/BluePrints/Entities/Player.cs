@@ -15,9 +15,9 @@ namespace Legends_Of_Lahar
         private int _gold;
         private int _experiencePoints;
         public Area CurrentArea { get; set; }
-        private List<int> CurrentQuests;
-        private List<int> CompletedQuests;
-        private List<int> EventsTouched;
+        private List<int> _currentQuests;
+        private List<int> _completedQuests;
+        private List<int> _eventsTouched; //markers for special options in events/quests
 
         public Player(string name, int lvl, int health, int mana, int pdamage, int mdamage, Resist res, int dodge, Skill[] skills, PlayerAttributes att,
             List<int> currentQuests, List<int> completedQuests, List<int> eventsTouched, int gold, int exp, string pic) 
@@ -26,9 +26,9 @@ namespace Legends_Of_Lahar
             _experiencePoints = exp;
             _gold = gold;
             Att = att;
-            CurrentQuests = currentQuests;
-            CompletedQuests = completedQuests;
-            EventsTouched = eventsTouched;
+            _currentQuests = currentQuests;
+            _completedQuests = completedQuests;
+            _eventsTouched = eventsTouched;
         }
 
         public void AddGold(int amount)
