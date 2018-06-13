@@ -35,3 +35,5 @@ C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lah
 C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.csproj.CoreCompileInputs.cache
 C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.exe
 C:\Users\madsm\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\obj\Debug\Legends of Lahar.pdb
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe.CodeAnalysisLog.xml
+C:\Users\Kevin\Documents\GitHub\Legends-of-Lahar\Legends of Lahar\Legends of Lahar\bin\Debug\Legends of Lahar.exe.lastcodeanalysissucceeded

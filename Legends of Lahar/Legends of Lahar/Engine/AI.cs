@@ -14,7 +14,8 @@ namespace Legends_Of_Lahar
             List<Skill> temp = ai.GetSkills();
             int action = rnd.Next(0, 2); //currently just taking a random choice
 
-            if (temp != null && temp.Count != 0 && action == 0)
+            //Use skill
+            if (action == 0 && temp != null && temp.Count != 0)
             {
                 List<int> possibleSkills = new List<int>();
 
@@ -29,12 +30,12 @@ namespace Legends_Of_Lahar
                 if(possibleSkills.Count != 0)
                 return new int[] { 3, possibleSkills.ElementAt(rnd.Next(0, possibleSkills.Count)) };
             }
-            else if(action == 1)
+            else if(action == 1) //Block
             {
-                return new int[] { 2, 0 };
+                return new int[] { 2, 0 }; 
             }
 
-            return new int[] { 1, 0 };
+            return new int[] { 1, 0 }; //Basic attack
         }
     }
 }
